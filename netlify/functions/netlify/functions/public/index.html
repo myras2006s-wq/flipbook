@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Flipbook — turn a sentence into a moving cartoon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,440;9..144,600;9..144,900&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="studio">
+    <header class="masthead">
+      <span class="mark">Flipbook</span>
+      <span class="tagline">turn a sentence into a moving cartoon</span>
+    </header>
+
+    <main class="panel" id="panel">
+      <form id="generate-form">
+        <label class="field-label" for="prompt">Describe the scene</label>
+        <textarea
+          id="prompt"
+          name="prompt"
+          rows="3"
+          placeholder="A fox in a yellow raincoat hopping over puddles in a quiet town square"
+          required
+        ></textarea>
+
+        <div class="row">
+          <div class="field">
+            <label for="style">Style</label>
+            <select id="style" name="style">
+              <option value="2d">2D cartoon</option>
+              <option value="pixar">3D Pixar-style</option>
+              <option value="anime">Anime</option>
+              <option value="watercolor">Watercolor</option>
+              <option value="clay">Claymation</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="ratio">Shot</label>
+            <select id="ratio" name="ratio">
+              <option value="1280:720">Widescreen 16:9</option>
+              <option value="720:1280">Vertical 9:16</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="duration">Length</label>
+            <select id="duration" name="duration">
+              <option value="5">5 seconds</option>
+              <option value="10">10 seconds</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" id="generate-btn">Generate</button>
+      </form>
+
+      <div id="status-area" class="status-area" hidden>
+        <div class="frame-readout">
+          <span class="frame-label">Frame</span>
+          <span class="frame-number" id="frame-number">00000</span>
+        </div>
+        <div class="perf-line" aria-hidden="true"></div>
+        <p class="status-text" id="status-text">Sending your scene to the studio…</p>
+      </div>
+
+      <div id="result-area" class="result-area" hidden>
+        <video id="result-video" controls playsinline></video>
+        <div class="result-actions">
+          <a id="download-link" download="flipbook.mp4">Download</a>
+          <button id="reset-btn" type="button">New take</button>
+        </div>
+      </div>
+
+      <p id="error-area" class="error-area" role="alert" hidden></p>
+    </main>
+
+    <footer class="footnote">
+      Powered by the Runway API. Most takes finish in a few minutes.
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
